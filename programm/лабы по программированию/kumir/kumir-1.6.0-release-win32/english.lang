@@ -1,0 +1,4 @@
+name = English
+loc_file = english.qm
+err_file = english.msg
+posix_name = en_US

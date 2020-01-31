@@ -1,0 +1,271 @@
+program  upr;
+uses crt;
+{-----------------Описание типов-----------------------}
+type 
+ocenka=record
+ekz:array[1..6] of integer;
+zach1,zach2:string;
+end;
+student=record
+fam,im,ot:string;
+end;
+vedomost=record
+ocen:ocenka;
+stud:student;
+end;
+A=array [1..20] of vedomost;
+{-------------описание переменных---------------------}
+var X,Q:A;
+i,j,k,l,n:integer;
+S,S1,S2:string;
+t,c,v,d:real;
+{------------------Присваивание -------------------------}
+procedure wwod_vedom (var o:vedomost);
+begin
+write('введите фамилию                ');readln(o.stud.fam);
+write('введите имя                    ');readln(o.stud.im);
+write('введите отчество               ');readln(o.stud.ot);
+write('введите оценку за 1 экзамен    ');readln(o.ocen.ekz[1]);
+write('введите оценку за 2 экзамен    ');readln(o.ocen.ekz[2]);
+write('введите оценку за 3 экзамен    ');readln(o.ocen.ekz[3]);
+write('введите оценку за 4 экзамен    ');readln(o.ocen.ekz[4]);
+write('введите оценку за 5 экзамен    ');readln(o.ocen.ekz[5]);
+write('введите оценку за 6 экзамен    ');readln(o.ocen.ekz[6]);
+write('введите оценку за 1 зачет      ');readln(o.ocen.zach1);
+write('введите оценку за 2 зачет      ');readln(o.ocen.zach2);
+end;
+{-----------------------------------------------------------}
+procedure wwod(var x:A);
+var i:integer;
+begin
+write('n=');readln(n);
+for i:=1 to n do begin
+clrscr;
+wwod_vedom(x[i]) end;end;
+{-----------------------------------------------------------}
+{---------------Печать таблицы -------------------}
+procedure wywod(n:integer;h:A);
+var i:integer;
+begin
+clrscr;
+for i:=1 to 80 do write('-');
+gotoxy (1,4);
+for i:=1 to 80 do write('-');
+gotoxy (1,2);write('|   Фамилия    |    результаты экзаменов     |    сдача зачетов    |           |');
+gotoxy (1,3);write('|   Инициалы   |1экз|2экз|3экз|4экз|5экз|6экз| 1 зачет  |2  зачет  | стипендия |');
+for i:=1 to n do 
+begin
+gotoxy (1,i+4);write('| ',h[i].stud.fam,' ',h[i].stud.im[1],'.',h[i].stud.ot[1],'.');
+gotoxy (16,i+4);write('| ',h[i].ocen.ekz[1]);
+gotoxy (21,i+4);write('| ',h[i].ocen.ekz[2]);
+gotoxy (26,i+4);write('| ',h[i].ocen.ekz[3]);
+gotoxy (31,i+4);write('| ',h[i].ocen.ekz[4]);
+gotoxy (36,i+4);write('| ',h[i].ocen.ekz[5]);
+gotoxy (41,i+4);write('| ',h[i].ocen.ekz[6]);
+gotoxy (46,i+4);write('|',h[i].ocen.zach1);
+gotoxy (57,i+4);write('|',h[i].ocen.zach2);
+gotoxy (68,i+4);write('|');
+gotoxy (80,i+4);write('|');
+end;
+gotoxy(1,n+5);for i:=1 to 80 do write('-');
+end;
+{---------------------------------------------------------}
+{--------------------------------}
+procedure priswaiwanie(var h:A);
+begin n:=15;
+h[1].stud.fam:='Бутявина';
+h[1].stud.im:='Мария';
+h[1].stud.ot:='Викторовна';
+h[1].ocen.ekz[1]:=3;
+h[1].ocen.ekz[2]:=4;
+h[1].ocen.ekz[3]:=2;
+h[1].ocen.ekz[4]:=3;
+h[1].ocen.ekz[5]:=3;
+h[1].ocen.ekz[6]:=2;
+h[1].ocen.zach1:='зачтено';
+h[1].ocen.zach2:='зачтено';
+h[2].stud.fam:='Гиршон';
+h[2].stud.im:='Даниэла';
+h[2].stud.ot:='Александровна';
+h[2].ocen.ekz[1]:=4;
+h[2].ocen.ekz[2]:=4;
+h[2].ocen.ekz[3]:=5;
+h[2].ocen.ekz[4]:=3;
+h[2].ocen.ekz[5]:=3;
+h[2].ocen.ekz[6]:=4;
+h[2].ocen.zach1:='зачтено';
+h[2].ocen.zach2:='зачтено';
+h[3].stud.fam:='Муравьев';
+h[3].stud.im:='Игорь';
+h[3].stud.ot:='Васильевич';
+h[3].ocen.ekz[1]:=3;
+h[3].ocen.ekz[2]:=3;
+h[3].ocen.ekz[3]:=2;
+h[3].ocen.ekz[4]:=2;
+h[3].ocen.ekz[5]:=2;
+h[3].ocen.ekz[6]:=2;
+h[3].ocen.zach1:='зачтено';
+h[3].ocen.zach2:='не зачтено';
+h[4].stud.fam:='Макурин';
+h[4].stud.im:='Николай';
+h[4].stud.ot:='Александрович';
+h[4].ocen.ekz[1]:=4;
+h[4].ocen.ekz[2]:=4;
+h[4].ocen.ekz[3]:=5;
+h[4].ocen.ekz[4]:=5;
+h[4].ocen.ekz[5]:=5;
+h[4].ocen.ekz[6]:=4;
+h[4].ocen.zach1:='зачтено';
+h[4].ocen.zach2:='зачтено';
+h[5].stud.fam:='Кочкина ';
+h[5].stud.im:='Алиса';
+h[5].stud.ot:='Витальевна';
+h[5].ocen.ekz[1]:=4;
+h[5].ocen.ekz[2]:=4;
+h[5].ocen.ekz[3]:=4;
+h[5].ocen.ekz[4]:=4;
+h[5].ocen.ekz[5]:=4;
+h[5].ocen.ekz[6]:=4;
+h[5].ocen.zach1:='зачтено';
+h[5].ocen.zach2:='зачтено';
+h[6].stud.fam:='Хоботова';
+h[6].stud.im:='Маргарита';
+h[6].stud.ot:='Павловна';
+h[6].ocen.ekz[1]:=3;
+h[6].ocen.ekz[2]:=3;
+h[6].ocen.ekz[3]:=3;
+h[6].ocen.ekz[4]:=3;
+h[6].ocen.ekz[5]:=3;
+h[6].ocen.ekz[6]:=3;
+h[6].ocen.zach1:='зачтено';
+h[6].ocen.zach2:='не зачтено';
+h[7].stud.fam:='Соколов';
+h[7].stud.im:='Андрей';
+h[7].stud.ot:='Борисович';
+h[7].ocen.ekz[1]:=5;
+h[7].ocen.ekz[2]:=5;
+h[7].ocen.ekz[3]:=5;
+h[7].ocen.ekz[4]:=5;
+h[7].ocen.ekz[5]:=5;
+h[7].ocen.ekz[6]:=5;
+h[7].ocen.zach1:='зачтено';
+h[7].ocen.zach2:='зачтено';
+h[8].stud.fam:='Бабурина';
+h[8].stud.im:='Наталья';
+h[8].stud.ot:='Федоровна';
+h[8].ocen.ekz[1]:=3;
+h[8].ocen.ekz[2]:=2;
+h[8].ocen.ekz[3]:=3;
+h[8].ocen.ekz[4]:=2;
+h[8].ocen.ekz[5]:=3;
+h[8].ocen.ekz[6]:=4;
+h[8].ocen.zach1:='зачтено';
+h[8].ocen.zach2:='зачтено';
+h[9].stud.fam:='Ефимов';
+h[9].stud.im:='Савва';
+h[9].stud.ot:='Игнатьевич';
+h[9].ocen.ekz[1]:=5;
+h[9].ocen.ekz[2]:=4;
+h[9].ocen.ekz[3]:=4;
+h[9].ocen.ekz[4]:=5;
+h[9].ocen.ekz[5]:=5;
+h[9].ocen.ekz[6]:=5;
+h[9].ocen.zach1:='зачтено';
+h[9].ocen.zach2:='не зачтено';
+h[15].stud.fam:='Перфилова';
+h[15].stud.im:='Татьяна';
+h[15].stud.ot:='Борисовна';
+h[15].ocen.ekz[1]:=4;
+h[15].ocen.ekz[2]:=3;
+h[15].ocen.ekz[3]:=3;
+h[15].ocen.ekz[4]:=3;
+h[15].ocen.ekz[5]:=3;
+h[15].ocen.ekz[6]:=4;
+h[15].ocen.zach1:='не зачтено';
+h[15].ocen.zach2:='зачтено';
+h[11].stud.fam:='Кочешков';
+h[11].stud.im:='Геннадий';
+h[11].stud.ot:='Николаевич';
+h[11].ocen.ekz[1]:=2;
+h[11].ocen.ekz[2]:=2;
+h[11].ocen.ekz[3]:=3;
+h[11].ocen.ekz[4]:=2;
+h[11].ocen.ekz[5]:=3;
+h[11].ocen.ekz[6]:=3;
+h[11].ocen.zach1:='зачтено';
+h[11].ocen.zach2:='зачтено';
+h[12].stud.fam:='Ходнев';
+h[12].stud.im:='Александр';
+h[12].stud.ot:='Михайлович';
+h[12].ocen.ekz[1]:=5;
+h[12].ocen.ekz[2]:=4;
+h[12].ocen.ekz[3]:=3;
+h[12].ocen.ekz[4]:=4;
+h[12].ocen.ekz[5]:=5;
+h[12].ocen.ekz[6]:=4;
+h[12].ocen.zach1:='зачтено';
+h[12].ocen.zach2:='не зачтено';
+h[13].stud.fam:='Лях';
+h[13].stud.im:='Елена';
+h[13].stud.ot:='Евгеньевна';
+h[13].ocen.ekz[1]:=3;
+h[13].ocen.ekz[2]:=3;
+h[13].ocen.ekz[3]:=2;
+h[13].ocen.ekz[4]:=2;
+h[13].ocen.ekz[5]:=2;
+h[13].ocen.ekz[6]:=3;
+h[13].ocen.zach1:='зачтено';
+h[13].ocen.zach2:='зачтено';
+h[14].stud.fam:='Дутов';
+h[14].stud.im:='Николай';
+h[14].stud.ot:='Владимирович';
+h[14].ocen.ekz[1]:=3;
+h[14].ocen.ekz[2]:=2;
+h[14].ocen.ekz[3]:=3;
+h[14].ocen.ekz[4]:=3;
+h[14].ocen.ekz[5]:=4;
+h[14].ocen.ekz[6]:=3;
+h[14].ocen.zach1:='зачтено';
+h[14].ocen.zach2:='не зачтено';
+h[10].stud.fam:='Талашов';
+h[10].stud.im:='Михаил';
+h[10].stud.ot:='Владимирович';
+h[10].ocen.ekz[1]:=2;
+h[10].ocen.ekz[2]:=2;
+h[10].ocen.ekz[3]:=3;
+h[10].ocen.ekz[4]:=3;
+h[10].ocen.ekz[5]:=2;
+h[10].ocen.ekz[6]:=2;
+h[10].ocen.zach1:='зачтено';
+h[10].ocen.zach2:='не зачтено';
+end;
+procedure srbalst(s:vedomost;var q:real);
+          var i,sr:integer;
+          begin
+               q:=0;
+               sr:=0;
+               for i:=1 to 6 do sr:=sr+s.ocen.ekz[i];
+               q:=sr/6;
+          end;
+          
+procedure srbal(y:A; var m:real);
+var i:integer;
+t:real;
+begin
+m:=0;
+for i:=1 to 15 do
+    begin
+    srbalst(y[i],t);
+    m:=m+t;
+    end;
+m:=m/15;
+end;
+
+begin
+ priswaiwanie(x);
+ wywod(15,x);
+ srbal(X,t);
+ write(t);
+end.
+
+

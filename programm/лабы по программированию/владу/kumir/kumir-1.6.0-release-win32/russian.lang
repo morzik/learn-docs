@@ -1,0 +1,4 @@
+name = Русский
+loc_file = russian.qm qt_ru.qm
+err_file = russian.msg
+posix_name = ru_RU

@@ -1,0 +1,4 @@
+name = Français
+loc_file = french.qm
+err_file = french.msg
+posix_name = fr_FR

@@ -1,0 +1,2 @@
+АЛГОРИТМ* -> алг : { this.setError(this.currentPosition, 2200212); appendSimpleLine(); }
+АЛГОРИТМ* -> если : { this.setError(this.currentPosition, 2200500); appendSimpleLine(); } 
